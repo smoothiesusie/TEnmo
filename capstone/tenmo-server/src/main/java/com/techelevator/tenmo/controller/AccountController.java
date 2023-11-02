@@ -3,11 +3,13 @@ package com.techelevator.tenmo.controller;
 import com.techelevator.tenmo.dao.AccountDao;
 import com.techelevator.tenmo.exception.DaoException;
 import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.Transfer;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,8 +21,15 @@ public class AccountController {
     }
 
     @RequestMapping(path = "/account", method = RequestMethod.GET)
-    public List<Account> getAccount() {
-        return accountDao.getAccount();
+    public List<Account> getAccountByUserId(@RequestParam int userId) {
+
+        if (userId > 0){
+            List<Account> accounts = new ArrayList<>();
+            accounts.add(accountDao.getAccountByUserId(userId));
+            return accounts;
+        }else{
+            return accountDao.getAccount();
+        }
     }
 
     @RequestMapping(path = "/account/{id}")

@@ -2,6 +2,7 @@ package com.techelevator.tenmo;
 
 import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.AuthenticatedUser;
+import com.techelevator.tenmo.model.Transfer;
 import com.techelevator.tenmo.model.UserCredentials;
 import com.techelevator.tenmo.services.AccountService;
 import com.techelevator.tenmo.services.AuthenticationService;
@@ -9,6 +10,7 @@ import com.techelevator.tenmo.services.ConsoleService;
 import com.techelevator.tenmo.services.TransferService;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class App {
 
@@ -102,9 +104,10 @@ public class App {
 
 	}
 
-	private void viewPendingRequests() {
+	private Transfer[] viewPendingRequests() {
 		// TODO Auto-generated method stub
-		
+		Transfer[] transfer = transferService.getTransfersByToUser(currentUser.getUser().getId());
+        return transfer;
 	}
 
 	private void sendBucks() {
