@@ -7,8 +7,8 @@ public class Transfer {
     private int id;
     private int transfer_type_id;
     private int transfer_status_id;
-    private User account_from;
-    private User account_to;
+    private int account_from;
+    private int account_to;
     private BigDecimal amount;
 
     public Transfer() {
