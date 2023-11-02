@@ -1,10 +1,12 @@
 package com.techelevator.tenmo.model;
 
+import java.math.BigDecimal;
+
 public class Account {
 
     private int id;
     private int userId;
-    private int balance;
+    private BigDecimal balance;
 
 
     public int getId() {
@@ -23,15 +25,15 @@ public class Account {
         this.userId = userId;
     }
 
-    public int getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
-    public Account(int id, int userId, int balance) {
+    public Account(int id, int userId, BigDecimal balance) {
         this.id = id;
         this.userId = userId;
         this.balance = balance;

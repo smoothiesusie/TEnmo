@@ -27,7 +27,7 @@ public class AccountController {
     public Account getAccountById(@PathVariable int id) {
         Account account = accountDao.getAccountById(id);
         if (account == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry we were unable to locate that account.")
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry we were unable to locate that account.");
         } else {
             return account;
         }

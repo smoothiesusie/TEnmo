@@ -7,10 +7,12 @@ import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.SqlInOutParameter;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcAccountDao implements AccountDao{
     private JdbcTemplate jdbcTemplate;
 
@@ -21,7 +23,7 @@ public class JdbcAccountDao implements AccountDao{
     @Override
     public List<Account> getAccount(){
         List<Account> accounts = new ArrayList<>();
-        String sql = "SELECT account_id, user_id, balance FROM accounts";
+        String sql = "SELECT account_id, user_id, balance FROM account";
         try{
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while(results.next()){
@@ -68,7 +70,7 @@ public class JdbcAccountDao implements AccountDao{
     @Override
     public Account createAccount(Account account){
         Account newAccount = null;
-        String sql = "INSERT INTO accounts(user_id, balance) VALUES (?, ?) RETURNING id";
+        String sql = "INSERT INTO account(user_id, balance) VALUES (?, ?) RETURNING id";
         try{
             int accountId = jdbcTemplate.queryForObject(sql, int.class, account.getUserId(), account.getBalance() );
             newAccount = getAccountById(accountId);
@@ -117,7 +119,7 @@ public class JdbcAccountDao implements AccountDao{
 
         ac.setId(rs.getInt("account_id"));
         ac.setUserId(rs.getInt("user_id"));
-        ac.setBalance(rs.getInt("balance"));
+        ac.setBalance(rs.getBigDecimal("balance"));
 
         return ac;
     }
