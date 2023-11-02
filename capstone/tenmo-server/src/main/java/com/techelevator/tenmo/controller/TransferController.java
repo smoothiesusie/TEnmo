@@ -21,9 +21,17 @@ public class TransferController {
     }
 
     @RequestMapping(path = "/transfer", method = RequestMethod.GET)
-    public List<Transfer> getTransfer() {
-        return transferDao.getTransfers();
-    }
+    public List<Transfer> getTransfer(@RequestParam int account_to) {
+
+        if (account_to > 0){
+            return transferDao.getTransferByToAccountId(account_to);
+        }else{
+            return transferDao.getTransfers();
+        }
+
+
+}
+
 
     @RequestMapping(path = "/transfer/{id}", method = RequestMethod.GET)
     public Transfer getTransferById(@PathVariable int id) {

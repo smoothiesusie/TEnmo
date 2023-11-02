@@ -6,8 +6,12 @@ import java.util.List;
 
 public interface TransferDao {
     List<Transfer> getTransfers();
+
+    List<Transfer> getTransferByToAccountId(int id);
     Transfer getTransferById(int id);
     Transfer createTransfer(Transfer transfer);
     Transfer updateTransfer(Transfer transfer);
     int deleteTransferById(int id);
+
+
 }

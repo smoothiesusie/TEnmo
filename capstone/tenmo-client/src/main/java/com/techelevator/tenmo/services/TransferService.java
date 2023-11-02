@@ -39,8 +39,8 @@ public class TransferService {
         }
         return transfer;
     }
-
-    public Transfer[] getTransferByToUser(int id) {
+    @Override
+    public Transfer[] getTransfersByToUser(int id) {
         Transfer[] transfers = null;
         try {
             ResponseEntity<Transfer[]> response = restTemplate.exchange(API_BASE_URL + "?account_to=" + id, HttpMethod.GET,
