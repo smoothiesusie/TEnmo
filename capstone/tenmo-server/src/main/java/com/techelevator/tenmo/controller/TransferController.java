@@ -46,7 +46,7 @@ public class TransferController {
         transfer.setId(id);
         try {
             Transfer updatedTransfer = transferDao.updateTransfer(transfer);
-            return transfer;
+            return updatedTransfer;
         } catch (DaoException dx) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Sorry we were unable to update the given transfer");
         }
