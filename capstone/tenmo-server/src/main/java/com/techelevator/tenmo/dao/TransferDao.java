@@ -13,5 +13,6 @@ public interface TransferDao {
     Transfer updateTransfer(Transfer transfer);
     int deleteTransferById(int id);
     List<Transfer> getTransferHistory(int id);
+    List<Transfer> getTransferByTransferStatus(int transfer_status_id);
 
 }

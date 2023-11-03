@@ -71,7 +71,21 @@ public class Transfer {
 
     @Override
     public String toString() {
-        return "Transfer{" + "id=" + id + ", transfer_type='" + transfer_type_id + '\'' + ", transfer_status='" + transfer_status_id + '\''
-                + ", account_from='" + account_from + '\'' + ", account_to=" + account_to + '\'' + ", amount='" + amount + "}";
+        String transfer_type = "";
+        String transfer_status = "";
+        if (transfer_type_id == 1) {
+            transfer_type = "Request";
+        } else if (transfer_type_id == 2) {
+            transfer_type = "Send";
+        }
+        if (transfer_status_id == 1) {
+            transfer_status = "Pending";
+        } else if (transfer_status_id == 2) {
+            transfer_status = "Approved";
+        } else if (transfer_status_id == 3) {
+            transfer_status = "Rejected";
+        }
+        return "Transfer{" + "id=" + id + ", transfer_type='" + transfer_type+ ", transfer_status=" + transfer_status +
+                ", account_from=" + account_from  + ", account_to=" + account_to + ", amount=" + amount + "}";
     }
 }

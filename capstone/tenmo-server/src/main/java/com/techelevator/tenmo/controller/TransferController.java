@@ -25,10 +25,19 @@ public class TransferController {
 
         if (account_to > 0){
             return transferDao.getTransferByToAccountId(account_to);
-        }else{
+        } else{
             return transferDao.getTransfers();
         }
 
+    }
+
+    @RequestMapping(path = "/transfer/{account_id}/pending", method = RequestMethod.GET)
+    public List<Transfer> getPendingTransfer(@RequestParam(defaultValue = "0") int account_id) {
+        if (account_id > 0) {
+            return transferDao.getTransferByTransferStatus(account_id);
+        } else {
+            return null;
+        }
     }
 
     @RequestMapping(path = "/transfer/{id}/history", method = RequestMethod.GET)

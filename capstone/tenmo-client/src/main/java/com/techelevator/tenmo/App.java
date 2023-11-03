@@ -99,15 +99,16 @@ public class App {
 	}
 
 	private void viewTransferHistory() {
-		// TODO Auto-generated method stub
+        // TODO needs sql calls
         Account account = accountService.getAccountByUserId(currentUser.getUser().getId());
-        System.out.println(transferService.getTransferHistory(account.getId()));
+        Transfer[] transfers = transferService.getTransferHistory(account.getId());
+        transferService.printTransfers(transfers);
 	}
 
-	private Transfer[] viewPendingRequests() {
+	private void viewPendingRequests() {
 		// TODO Auto-generated method stub
-		Transfer[] transfer = transferService.getTransfersByToUser(currentUser.getUser().getId());
-        return transfer;
+		Transfer[] transfers = transferService.getTransferByStatus(currentUser.getUser().getId());
+        transferService.printTransfers(transfers);
 	}
 
 	private void sendBucks() {

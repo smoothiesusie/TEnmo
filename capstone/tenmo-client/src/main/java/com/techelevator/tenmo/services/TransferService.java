@@ -52,6 +52,18 @@ public class TransferService {
         return transfers;
     }
 
+    public Transfer[] getTransferByStatus(int user_id) {
+        Transfer[] transfers = null;
+        try {
+            ResponseEntity<Transfer[]> response = restTemplate.exchange(API_BASE_URL + "/pending/?account_id=" + user_id, HttpMethod.GET,
+                    makeAuthEntity(), Transfer[].class);
+            transfers = response.getBody();
+        } catch (RestClientResponseException | ResourceAccessException e) {
+            BasicLogger.log(e.getMessage());
+        }
+        return transfers;
+    }
+
     public Transfer[] getTransferHistory(int id) {
         Transfer[] transfers = null;
         try {
@@ -109,5 +121,13 @@ public class TransferService {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(authToken);
         return new HttpEntity<>(headers);
+    }
+
+    public void printTransfers(Transfer[] transfers) {
+        if (transfers != null) {
+            for (Transfer transfer : transfers) {
+                System.out.println(transfer.toString());
+            }
+        }
     }
 }

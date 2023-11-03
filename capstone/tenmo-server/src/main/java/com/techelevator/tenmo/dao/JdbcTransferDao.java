@@ -92,6 +92,28 @@ public class JdbcTransferDao implements TransferDao{
     }
 
     @Override
+    public List<Transfer> getTransferByTransferStatus(int user_id){
+        List<Transfer> transfers = new ArrayList<>();
+        String sql = "SELECT t.transfer_id, t.transfer_type_id, t.transfer_status_id, t.account_from, t.account_to, t.amount" +
+                " FROM transfer t" +
+                " inner join transfer_status ts" +
+                " on ts.transfer_status_id = t.transfer_status_id" +
+                " WHERE (account_to = 2001) OR (account_from = 2001) AND (t.transfer_status_id = (SELECT transfer_status_id From transfer_status WHERE transfer_status_desc ILIKE 'Pending'))";
+        try{
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, user_id, user_id);
+
+            while (results.next()) {
+                Transfer transfer = mapRowToTransfer(results);
+                transfers.add(transfer);
+            }
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return transfers;
+
+    }
+
+    @Override
     public Transfer createTransfer(Transfer transfer) {
         Transfer newTransfer = null;
         String sql = "INSERT INTO transfer(" +
