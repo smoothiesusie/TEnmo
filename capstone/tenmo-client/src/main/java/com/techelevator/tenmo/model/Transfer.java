@@ -10,6 +10,8 @@ public class Transfer {
     private int account_to;
     private BigDecimal amount;
 
+
+
     public int getId() {
         return id;
     }

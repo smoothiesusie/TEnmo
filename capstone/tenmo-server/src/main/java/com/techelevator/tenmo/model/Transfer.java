@@ -11,6 +11,15 @@ public class Transfer {
     private int account_to;
     private BigDecimal amount;
 
+    //set variables for transfer type and status; could be used in the App in Client CLI
+    public static final String transfer_type_send = "send";
+    public static final String transfer_type_request = "request";
+    public static final String transfer_type_approved = "approved";
+    public static final String transfer_type_rejected = "rejected";
+    public static final String transfer_type_pending = "pending";
+
+
+
     public Transfer() {
     }
 

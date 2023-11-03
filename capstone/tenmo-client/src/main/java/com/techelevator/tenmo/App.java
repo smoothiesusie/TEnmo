@@ -1,9 +1,6 @@
 package com.techelevator.tenmo;
 
-import com.techelevator.tenmo.model.Account;
-import com.techelevator.tenmo.model.AuthenticatedUser;
-import com.techelevator.tenmo.model.Transfer;
-import com.techelevator.tenmo.model.UserCredentials;
+import com.techelevator.tenmo.model.*;
 import com.techelevator.tenmo.services.AccountService;
 import com.techelevator.tenmo.services.AuthenticationService;
 import com.techelevator.tenmo.services.ConsoleService;
@@ -113,7 +110,27 @@ public class App {
 
 	private void sendBucks() {
 		// TODO Auto-generated method stub
-		
+        //called user service to retrieve list of users from the backend
+        //prompted to collect amount of bucks you want to send
+
+        int toUserId = consoleService.promptForInt("Enter Id of receiver.");
+        BigDecimal amount = consoleService.promptForBigDecimal("Enter amount being sent");
+        int fromUserId = currentUser.getUser().getId();
+
+        //set variable in the Transfer Model in Server
+        TransferDTO transferDTO = new TransferDTO(fromUserId, toUserId, amount, TransferDTO.transfer_type_send);
+        Transfer transfer = transferService.addTransfer(transferDTO);
+        //prompted to select a user (id, name, etc)
+        if(transfer != null){
+            System.out.println(amount + "TE bucks were sent to User"+ toUserId);
+        } else {
+            consoleService.printErrorMessage();
+        }
+
+
+        //**constructed a transferDTO object, sent it through the transfer service(line 122) to the backend
+        //**decided how you want to send this info(sender, receiver, amount) to the backend
+
 	}
 
 	private void requestBucks() {
