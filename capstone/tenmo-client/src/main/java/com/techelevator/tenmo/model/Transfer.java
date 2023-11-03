@@ -69,4 +69,9 @@ public class Transfer {
         this.amount = amount;
     }
 
+    @Override
+    public String toString() {
+        return "Transfer{" + "id=" + id + ", transfer_type='" + transfer_type_id + '\'' + ", transfer_status='" + transfer_status_id + '\''
+                + ", account_from='" + account_from + '\'' + ", account_to=" + account_to + '\'' + ", amount='" + amount + "}";
+    }
 }

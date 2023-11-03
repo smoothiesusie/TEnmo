@@ -94,15 +94,14 @@ public class App {
     }
 
 	private void viewCurrentBalance() {
-		// TODO Auto-generated method stub
 		Account account = accountService.getAccountByUserId(currentUser.getUser().getId());
         System.out.println(account.getBalance());
 	}
 
-	private Transfer[] viewTransferHistory() {
+	private void viewTransferHistory() {
 		// TODO Auto-generated method stub
         Account account = accountService.getAccountByUserId(currentUser.getUser().getId());
-        return transferService.getTransferHistory(account.getId());
+        System.out.println(transferService.getTransferHistory(account.getId()));
 	}
 
 	private Transfer[] viewPendingRequests() {

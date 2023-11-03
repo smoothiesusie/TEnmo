@@ -21,14 +21,13 @@ public class AccountController {
     }
 
     @RequestMapping(path = "/account", method = RequestMethod.GET)
-    public List<Account> getAccountByUserId(@RequestParam(defaultValue = "0") int user_id) {
+    public Account getAccountByUserId(@RequestParam(defaultValue = "0") int user_id) {
 
         if (user_id > 0){
-            List<Account> accounts = new ArrayList<>();
-            accounts.add(accountDao.getAccountByUserId(user_id));
-            return accounts;
+            Account account = accountDao.getAccountByUserId(user_id);
+            return account;
         }else{
-            return accountDao.getAccount();
+            return null;
         }
     }
 
