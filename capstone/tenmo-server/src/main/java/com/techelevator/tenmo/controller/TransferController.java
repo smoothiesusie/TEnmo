@@ -21,7 +21,7 @@ public class TransferController {
     }
 
     @RequestMapping(path = "/transfer", method = RequestMethod.GET)
-    public List<Transfer> getTransfer(@RequestParam int account_to) {
+    public List<Transfer> getTransfer(@RequestParam(defaultValue = "0") int account_to) {
 
         if (account_to > 0){
             return transferDao.getTransferByToAccountId(account_to);
@@ -29,8 +29,12 @@ public class TransferController {
             return transferDao.getTransfers();
         }
 
+    }
 
-}
+    @RequestMapping(path = "/transfer/{id}/history", method = RequestMethod.GET)
+    public List<Transfer> getTransferHistory(@PathVariable int id) {
+        return transferDao.getTransferHistory(id);
+    }
 
 
     @RequestMapping(path = "/transfer/{id}", method = RequestMethod.GET)

@@ -52,6 +52,17 @@ public class TransferService {
         return transfers;
     }
 
+    public Transfer[] getTransferHistory(int id) {
+        Transfer[] transfers = null;
+        try {
+            ResponseEntity<Transfer[]> response = restTemplate.exchange(API_BASE_URL + id + "/history", HttpMethod.GET, makeAuthEntity(), Transfer[].class);
+            transfers = response.getBody();
+        } catch (RestClientResponseException | ResourceAccessException e) {
+            BasicLogger.log(e.getMessage());
+        }
+        return transfers;
+    }
+
     public Transfer addTransfer(Transfer transfer) {
         HttpEntity<Transfer> entity = makeTransferEntity(transfer);
         Transfer returnedTransfer = null;

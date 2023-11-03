@@ -93,15 +93,16 @@ public class App {
         }
     }
 
-	private BigDecimal viewCurrentBalance() {
+	private void viewCurrentBalance() {
 		// TODO Auto-generated method stub
 		Account account = accountService.getAccountByUserId(currentUser.getUser().getId());
-        return account.getBalance();
+        System.out.println(account.getBalance());
 	}
 
-	private void viewTransferHistory() {
+	private Transfer[] viewTransferHistory() {
 		// TODO Auto-generated method stub
-
+        Account account = accountService.getAccountByUserId(currentUser.getUser().getId());
+        return transferService.getTransferHistory(account.getId());
 	}
 
 	private Transfer[] viewPendingRequests() {

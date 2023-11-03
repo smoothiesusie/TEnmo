@@ -12,6 +12,6 @@ public interface TransferDao {
     Transfer createTransfer(Transfer transfer);
     Transfer updateTransfer(Transfer transfer);
     int deleteTransferById(int id);
-
+    List<Transfer> getTransferHistory(int id);
 
 }
